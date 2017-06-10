@@ -35,7 +35,6 @@
     ./configure
     --sysconfdir=/etc
     --localstatedir=/var
-    --disable-cpp-check
   args:
     chdir: /tmp/nzbget-{{ nzbget_version }}
 

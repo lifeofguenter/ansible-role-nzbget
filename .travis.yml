@@ -8,8 +8,16 @@ dist: trusty
 # Install ansible
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
     packages:
-    - python-pip
+      - python-pip
+      - g++-4.9
+env:
+  - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+
+before_install:
+  - eval "${MATRIX_EVAL}"
 
 install:
   # Install ansible
