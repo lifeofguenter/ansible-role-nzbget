@@ -1,0 +1,3 @@
+---
+
+nzbget_version_string_match: "nzbget version: {{ nzbget_version }}"

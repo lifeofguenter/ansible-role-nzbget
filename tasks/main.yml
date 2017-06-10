@@ -1,0 +1,9 @@
+---
+
+- name: get nzbget version
+  command: nzbget --version
+  register: nzbget_version_current
+  ignore_errors: yes
+
+- include: compile.yml
+  when: nzbget_version_current.rc != 0 or not nzbget_version_current.stdout | search(nzbget_version_string_match)
