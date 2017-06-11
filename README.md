@@ -19,7 +19,7 @@ none
 
 ## Example Playbook
 
-    - hosts: nvr
+    - hosts: media-center
       roles:
         - { role: lifeofguenter.nzbget }
 
