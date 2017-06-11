@@ -48,7 +48,7 @@ if [ -e $PID_FILE ]; then
     fi
 fi
 
-if [ ! -d "$(dirname "${PID_FILE}")"]; then
+if [ ! -d "$(dirname "${PID_FILE}")" ]; then
     mkdir -p "$(dirname "${PID_FILE}")"
     chown ${NZBGET_USER}:${NZBGET_GROUP} "$(dirname "${PID_FILE}")"
 fi
