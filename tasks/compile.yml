@@ -1,6 +1,6 @@
 ---
 
-- name: install prerequisites
+- name: install build tools
   apt:
     name: "{{ item }}"
     state: present
@@ -35,6 +35,7 @@
     ./configure
     --sysconfdir=/etc
     --localstatedir=/var
+    --datarootdir=/usr
   args:
     chdir: /tmp/nzbget-{{ nzbget_version }}
 

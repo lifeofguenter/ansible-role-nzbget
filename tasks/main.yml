@@ -1,5 +1,7 @@
 ---
 
+- include: prerequisites.yml
+
 - name: get nzbget version
   command: nzbget --version
   register: nzbget_version_current
