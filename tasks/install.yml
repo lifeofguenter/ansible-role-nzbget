@@ -1,11 +1,19 @@
 ---
 
+- name: create run folder
+  file:
+    path: /run/nzbget
+    state: directory
+    mode: 0755
+    owner: "{{ nzbget_user }}"
+  become: yes
+
 - name: check for systemd
   command: systemctl --version
   register: nzbget_systemctl_version
   ignore_errors: yes
 
-- name: Add nzbget.service
+- name: add nzbget.service
   template:
     src: nzbget.service.ini
     dest: /lib/systemd/system/nzbget.service
@@ -16,7 +24,7 @@
     - nzbget_reload_systemd
     - restart_nzbget
 
-- name: Add nzbget.init
+- name: add nzbget.init
   template:
     src: nzbget.init.sh
     dest: /etc/init.d/nzbget
