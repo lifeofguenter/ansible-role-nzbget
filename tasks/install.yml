@@ -8,6 +8,13 @@
     owner: "{{ nzbget_user }}"
   become: yes
 
+- name: perma run folder
+  template:
+    src: tmpfiles.conf
+    dest: /etc/tmpfiles.d/nzbget.conf
+    mode: 0644
+  become: yes
+
 - name: check for systemd
   command: systemctl --version
   register: nzbget_systemctl_version
