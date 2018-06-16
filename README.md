@@ -10,7 +10,7 @@ none
 
 ## Role Variables
 
-- `nzbget_version: 18.1`
+- `nzbget_version: 20.0`
 - `nzbget_user: nzb`
 
 ## Dependencies
