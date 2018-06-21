@@ -5,21 +5,33 @@ python: "2.7"
 sudo: required
 dist: trusty
 
+branches:
+  only:
+    - master
+    - /^\d+\.\d+\.\d+$/
+
 # https://nzbget.net/prerequisites-for-c++-compiler
 addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - python-pip
+      - python-setuptools
       - g++-4.9
 
 before_install:
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
 
 install:
+  - sudo -H easy_install pip
+  # http://urllib3.readthedocs.io/en/latest/user-guide.html#ssl-py2
+  - sudo -H pip install -U pyOpenSSL cryptography idna certifi
+  - sudo -H pip install -U urllib3
+  # https://github.com/ansible/ansible/issues/23642#issuecomment-297469043
+  - sudo -H pip install -U ndg-httpsclient
+
   # Install ansible
-  - pip install ansible
+  - sudo -H pip install -U ansible
 
   # Check ansible version
   - ansible --version
