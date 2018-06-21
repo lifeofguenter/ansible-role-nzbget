@@ -40,7 +40,7 @@
     chdir: /tmp/nzbget-{{ nzbget_version }}
 
 - name: make
-  command: make
+  command: make -j{{ ansible_processor_vcpus }}
   args:
     chdir: /tmp/nzbget-{{ nzbget_version }}
 
