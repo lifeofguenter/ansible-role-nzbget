@@ -1,6 +1,9 @@
 ---
 
 - hosts: localhost
-  remote_user: root
+
+  vars:
+    nzbget_user: root
+
   roles:
     - ansible-role-nzbget

@@ -1,0 +1,11 @@
+---
+
+- name: install tools
+  apt:
+    name:
+      - unrar
+      - p7zip-full
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes

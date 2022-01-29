@@ -1,11 +1,12 @@
 ---
 
 - name: nzbget_reload_systemd
-  command: systemctl daemon-reload
+  ansible.builtin.systemd:
+    daemon_reload: yes
   become: yes
 
 - name: restart_nzbget
-  service:
+  ansible.builtin.systemd:
     name: nzbget
     state: restarted
     enabled: yes

@@ -2,20 +2,19 @@
 
 - name: install build tools
   apt:
-    name: "{{ item }}"
+    name:
+      - ca-certificates
+      - make
+      - gcc
+      - g++
+      - pkg-config
+      - libxml2-dev
+      - libncurses-dev
+      - libssl-dev
+      - zlib1g-dev
     state: present
     update_cache: yes
     cache_valid_time: 3600
-  with_items:
-    - ca-certificates
-    - make
-    - gcc
-    - g++
-    - pkg-config
-    - libxml2-dev
-    - libncurses5-dev
-    - libssl-dev
-    - zlib1g-dev
   become: yes
 
 - name: get source code
@@ -28,7 +27,8 @@
   command: make clean
   args:
     chdir: /tmp/nzbget-{{ nzbget_version }}
-  ignore_errors: yes
+  failed_when: no
+  changed_when: yes
 
 - name: configure
   command: >
@@ -38,15 +38,18 @@
     --datarootdir=/usr/share
   args:
     chdir: /tmp/nzbget-{{ nzbget_version }}
+  changed_when: yes
 
 - name: make
   command: make -j{{ ansible_processor_vcpus }}
   args:
     chdir: /tmp/nzbget-{{ nzbget_version }}
+  changed_when: yes
 
 - name: install
   command: make install
   args:
-    chdir: /tmp/nzbget-{{ nzbget_version }} 
+    chdir: /tmp/nzbget-{{ nzbget_version }}
   become: yes
+  changed_when: yes
   notify: restart_nzbget

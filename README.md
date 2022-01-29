@@ -1,17 +1,19 @@
-[![Build Status](https://travis-ci.org/lifeofguenter/ansible-role-nzbget.svg?branch=master)](https://travis-ci.org/lifeofguenter/ansible-role-nzbget)
+# lifeofguenter.nzbget
 
-# Ansible Role: NZBGet
+[![Build Status](https://travis-ci.com/lifeofguenter/ansible-role-nzbget.svg?branch=main)](https://travis-ci.com/lifeofguenter/ansible-role-nzbget)
 
-An Ansible role that installs NZBGet (from source) on Debian like systems.
+An Ansible role that compiles & configures NZBGet on Debian-like systems.
 
 ## Requirements
 
-none
+_none_
 
 ## Role Variables
 
-- `nzbget_version: 20.0`
-- `nzbget_user: nzb`
+```yaml
+nzbget_version: 21.1
+nzbget_user: nzb
+```
 
 ## Dependencies
 
@@ -19,10 +21,16 @@ none
 
 ## Example Playbook
 
-    - hosts: media-center
-      roles:
-        - { role: lifeofguenter.nzbget }
+```yaml
+- hosts: media-center
+  roles:
+    - { role: lifeofguenter.nzbget }
+```
 
 ## License
 
-MIT
+**MIT**, see the [LICENSE file](LICENSE) for details.
+
+## Author Information
+
+[Günter Grodotzki](https://www.lifeofguenter.de)
