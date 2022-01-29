@@ -1,13 +1,14 @@
 ---
 
-- include: prerequisites.yml
-
 - name: get nzbget version
   command: nzbget --version
   register: nzbget_version_current
   ignore_errors: yes
+  changed_when: no
 
-- include: compile.yml
-  when: nzbget_version_current.rc != 0 or not nzbget_version_current.stdout is search(nzbget_version_string_match)
+- import_tasks: compile.yml
+  when: nzbget_version_current is failure or not nzbget_version_current.stdout is search(nzbget_version_string_match)
 
-- include: install.yml
+- import_tasks: install.yml
+
+- import_tasks: tools.yml

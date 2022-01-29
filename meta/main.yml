@@ -1,21 +1,23 @@
 ---
 
 galaxy_info:
-  author: Gunter Grodotzki
-  description: Installs NZBGet
-  company: 9JKH (Pty) Ltd.
+  role_name: nzbget
+  namespace: lifeofguenter
+  author: Günter Grodotzki
+  description: Compiles and configures NZBGet on Debian-like systems.
   license: MIT
-  min_ansible_version: 2.5
+  min_ansible_version: '2.10'
   platforms:
-  - name: Ubuntu
-    versions:
-      - bionic
-      - xenial
-      - trusty
-  - name: Debian
-    versions:
-      - stretch
-      - jessie
+    - name: Ubuntu
+      versions:
+        - focal
+        - bionic
+        - xenial
+    - name: Debian
+      versions:
+        - bullseye
+        - buster
+        - stretch
   galaxy_tags:
     - system
     - htpc
