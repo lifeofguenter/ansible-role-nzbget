@@ -3,7 +3,7 @@
 - name: nzbget_reload_systemd
   ansible.builtin.systemd:
     daemon_reload: yes
-  become: yhes
+  become: yes
 
 - name: restart_nzbget
   ansible.builtin.systemd:
