@@ -1,26 +1,34 @@
 ---
 
+- name: Create bitcoin user
+  ansible.builtin.user:
+    name: '{{ nzbget_user }}'
+    shell: /usr/sbin/nologin
+    home: /home/{{ nzbget_user }}
+  become: true
+  when: nzbget_user != 'root'
+
 - name: Create run folder
   ansible.builtin.file:
     path: /run/nzbget
     state: directory
     mode: '0755'
-    owner: "{{ nzbget_user }}"
-  become: yes
+    owner: '{{ nzbget_user }}'
+  become: true
 
 - name: Perma run folder
   ansible.builtin.template:
     src: tmpfiles.conf
     dest: /etc/tmpfiles.d/nzbget.conf
     mode: '0644'
-  become: yes
+  become: true
 
 - name: Add nzbget.service
   ansible.builtin.template:
-    src: nzbget.service.ini
-    dest: /lib/systemd/system/nzbget.service
+    src: nzbget.service
+    dest: /etc/systemd/system/nzbget.service
     mode: '0644'
-  become: yes
+  become: true
   notify:
     - Nzbget_reload_systemd
     - Restart_nzbget
@@ -30,4 +38,4 @@
     path: /etc/nzbget.conf
     state: touch
     mode: '0644'
-  become: yes
+  become: true
