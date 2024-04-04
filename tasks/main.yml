@@ -1,14 +1,17 @@
 ---
 
-- name: get nzbget version
-  command: nzbget --version
+- name: Get nzbget version
+  ansible.builtin.command: nzbget --version
   register: nzbget_version_current
   ignore_errors: yes
   changed_when: no
 
-- import_tasks: compile.yml
+- name: Import compile.yml
+  ansible.builtin.import_tasks: compile.yml
   when: nzbget_version_current is failure or not nzbget_version_current.stdout is search(nzbget_version_string_match)
 
-- import_tasks: install.yml
+- name: Import install.yml
+  ansible.builtin.import_tasks: install.yml
 
-- import_tasks: tools.yml
+- name: Import tools.yml
+  ansible.builtin.import_tasks: tools.yml

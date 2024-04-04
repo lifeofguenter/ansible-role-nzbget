@@ -1,7 +1,7 @@
 ---
 
-- name: install tools
-  apt:
+- name: Install tools
+  ansible.builtin.apt:
     name:
       - unrar
       - p7zip-full

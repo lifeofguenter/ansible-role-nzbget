@@ -1,7 +1,5 @@
 # lifeofguenter.nzbget
 
-[![Build Status](https://travis-ci.com/lifeofguenter/ansible-role-nzbget.svg?branch=main)](https://travis-ci.com/lifeofguenter/ansible-role-nzbget)
-
 An Ansible role that compiles & configures NZBGet on Debian-like systems.
 
 ## Requirements
@@ -11,7 +9,7 @@ _none_
 ## Role Variables
 
 ```yaml
-nzbget_version: 21.1
+nzbget_version: 23.0
 nzbget_user: nzb
 ```
 
