@@ -4,8 +4,7 @@
   ansible.builtin.user:
     name: '{{ nzbget_user }}'
     shell: /usr/sbin/nologin
-    create_home: false
-    system: true
+    home: /home/{{ nzbget_user }}
   become: true
   when: nzbget_user != 'root'
 
