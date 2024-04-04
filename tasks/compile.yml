@@ -3,7 +3,6 @@
 - name: Install build tools
   ansible.builtin.apt:
     name:
-      - autotools
       - autoconf
       - ca-certificates
       - make
