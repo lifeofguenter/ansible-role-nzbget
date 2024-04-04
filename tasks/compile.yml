@@ -4,11 +4,13 @@
   ansible.builtin.apt:
     name:
       - ca-certificates
+      - cmake
       - make
       - gcc
       - g++
       - pkg-config
       - libxml2-dev
+      - libboost-json1.81-dev
       - libncurses-dev
       - libssl-dev
       - zlib1g-dev
@@ -23,33 +25,34 @@
     dest: /tmp
     remote_src: True
 
-- name: Make clean
-  ansible.builtin.command: make clean
-  args:
-    chdir: /tmp/nzbget-{{ nzbget_version }}
-  failed_when: no
-  changed_when: yes
+- name: Create build folder
+  ansible.builtin.file:
+    path: /tmp/nzbget-{{ nzbget_version }}/build/
+    state: directory
+  become: yes
 
 - name: Configure
-  ansible.builtin.command: >
-    ./configure
-    --sysconfdir=/etc
-    --localstatedir=/var
-    --datarootdir=/usr/share
+  ansible.builtin.command: cmake ..
   args:
-    chdir: /tmp/v{{ nzbget_version }}
+    chdir: /tmp/nzbget-{{ nzbget_version }}/build/
   changed_when: yes
 
-- name: Make
-  ansible.builtin.command: make -j{{ ansible_processor_vcpus }}
+- name: Build
+  ansible.builtin.command: cmake --build . -j {{ ansible_processor_vcpus }}
   args:
-    chdir: /tmp/v{{ nzbget_version }}
+    chdir: /tmp/nzbget-{{ nzbget_version }}/build/
   changed_when: yes
 
 - name: Install
-  ansible.builtin.command: make install
+  ansible.builtin.command: cmake --install .
   args:
-    chdir: /tmp/v{{ nzbget_version }}
+    chdir: /tmp/nzbget-{{ nzbget_version }}
   become: yes
   changed_when: yes
   notify: Restart_nzbget
+
+- name: Cleanup
+  ansible.builtin.file:
+    path: /tmp/nzbget-{{ nzbget_version }}
+    state: absent
+  become: true
