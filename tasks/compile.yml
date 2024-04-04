@@ -37,19 +37,19 @@
     --localstatedir=/var
     --datarootdir=/usr/share
   args:
-    chdir: /tmp/nzbget-{{ nzbget_version }}
+    chdir: /tmp/v{{ nzbget_version }}
   changed_when: yes
 
 - name: Make
   ansible.builtin.command: make -j{{ ansible_processor_vcpus }}
   args:
-    chdir: /tmp/nzbget-{{ nzbget_version }}
+    chdir: /tmp/v{{ nzbget_version }}
   changed_when: yes
 
 - name: Install
   ansible.builtin.command: make install
   args:
-    chdir: /tmp/nzbget-{{ nzbget_version }}
+    chdir: /tmp/v{{ nzbget_version }}
   become: yes
   changed_when: yes
   notify: Restart_nzbget
