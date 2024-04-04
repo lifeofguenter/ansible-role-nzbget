@@ -1,33 +1,33 @@
 ---
 
-- name: create run folder
-  file:
+- name: Create run folder
+  ansible.builtin.file:
     path: /run/nzbget
     state: directory
-    mode: 0755
+    mode: '0755'
     owner: "{{ nzbget_user }}"
   become: yes
 
-- name: perma run folder
-  template:
+- name: Perma run folder
+  ansible.builtin.template:
     src: tmpfiles.conf
     dest: /etc/tmpfiles.d/nzbget.conf
-    mode: 0644
+    mode: '0644'
   become: yes
 
-- name: add nzbget.service
-  template:
+- name: Add nzbget.service
+  ansible.builtin.template:
     src: nzbget.service.ini
     dest: /lib/systemd/system/nzbget.service
-    mode: 0644
+    mode: '0644'
   become: yes
   notify:
-    - nzbget_reload_systemd
-    - restart_nzbget
+    - Nzbget_reload_systemd
+    - Restart_nzbget
 
-- name: touch nzbget.conf
-  file:
+- name: Touch nzbget.conf
+  ansible.builtin.file:
     path: /etc/nzbget.conf
     state: touch
-    mode: 0644
+    mode: '0644'
   become: yes

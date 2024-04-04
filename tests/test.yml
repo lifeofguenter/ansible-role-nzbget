@@ -5,5 +5,6 @@
   vars:
     nzbget_user: root
 
-  roles:
-    - ansible-role-nzbget
+  tasks:
+    - ansible.builtin.import_role:
+        name: project

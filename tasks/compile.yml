@@ -1,7 +1,7 @@
 ---
 
-- name: install build tools
-  apt:
+- name: Install build tools
+  ansible.builtin.apt:
     name:
       - ca-certificates
       - make
@@ -17,21 +17,21 @@
     cache_valid_time: 3600
   become: yes
 
-- name: get source code
-  unarchive:
-    src: https://github.com/nzbget/nzbget/releases/download/v{{ nzbget_version }}/nzbget-{{ nzbget_version }}-src.tar.gz
+- name: Get source code
+  ansible.builtin.unarchive:
+    src: https://github.com/nzbgetcom/nzbget/archive/refs/tags/v{{ nzbget_version }}.tar.gz
     dest: /tmp
     remote_src: True
 
-- name: make clean
-  command: make clean
+- name: Make clean
+  ansible.builtin.command: make clean
   args:
     chdir: /tmp/nzbget-{{ nzbget_version }}
   failed_when: no
   changed_when: yes
 
-- name: configure
-  command: >
+- name: Configure
+  ansible.builtin.command: >
     ./configure
     --sysconfdir=/etc
     --localstatedir=/var
@@ -40,16 +40,16 @@
     chdir: /tmp/nzbget-{{ nzbget_version }}
   changed_when: yes
 
-- name: make
-  command: make -j{{ ansible_processor_vcpus }}
+- name: Make
+  ansible.builtin.command: make -j{{ ansible_processor_vcpus }}
   args:
     chdir: /tmp/nzbget-{{ nzbget_version }}
   changed_when: yes
 
-- name: install
-  command: make install
+- name: Install
+  ansible.builtin.command: make install
   args:
     chdir: /tmp/nzbget-{{ nzbget_version }}
   become: yes
   changed_when: yes
-  notify: restart_nzbget
+  notify: Restart_nzbget
