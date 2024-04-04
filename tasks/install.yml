@@ -1,10 +1,11 @@
 ---
 
-- name: Create bitcoin user
+- name: Create nzbget user
   ansible.builtin.user:
     name: '{{ nzbget_user }}'
     shell: /usr/sbin/nologin
-    home: /home/{{ nzbget_user }}
+    create_home: false
+    system: true
   become: true
   when: nzbget_user != 'root'
 

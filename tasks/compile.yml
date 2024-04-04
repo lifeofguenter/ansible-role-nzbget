@@ -43,7 +43,7 @@
 - name: Build
   ansible.builtin.command: make -j{{ ansible_processor_vcpus }}
   args:
-    chdir: /tmp/nzbget-{{ nzbget_version }}/build/
+    chdir: /tmp/nzbget-{{ nzbget_version }}
   changed_when: true
 
 - name: Install
