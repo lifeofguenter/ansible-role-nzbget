@@ -2,6 +2,10 @@
 
 An Ansible role that compiles & configures NZBGet on Debian-like systems.
 
+/usr/share/nzbget/nzbget.conf -> /home/nzb/.nzget
+webuidirectory
+configtemplate
+
 ## Requirements
 
 _none_
