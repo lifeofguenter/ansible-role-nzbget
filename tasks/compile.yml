@@ -14,8 +14,7 @@
       - libncurses-dev
       - libssl-dev
       - zlib1g-dev
-    state: present
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
   become: true
 
@@ -30,7 +29,6 @@
     path: /tmp/nzbget-{{ nzbget_version }}/build/
     state: directory
     mode: '0755'
-  become: true
 
 - name: Configure
   ansible.builtin.command: cmake ..

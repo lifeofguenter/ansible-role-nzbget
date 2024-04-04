@@ -2,12 +2,12 @@
 
 - name: Nzbget_reload_systemd
   ansible.builtin.systemd:
-    daemon_reload: yes
-  become: yes
+    daemon_reload: true
+  become: true
 
 - name: Restart_nzbget
   ansible.builtin.systemd:
     name: nzbget
     state: restarted
-    enabled: yes
-  become: yes
+    enabled: true
+  become: true
