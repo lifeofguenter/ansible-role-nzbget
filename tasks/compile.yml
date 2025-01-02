@@ -23,12 +23,6 @@
     dest: /tmp
     remote_src: true
 
-- name: Create configure
-  ansible.builtin.command: autoreconf --install
-  args:
-    chdir: /tmp/nzbget-{{ nzbget_version }}
-  changed_when: true
-
 - name: Create build folder
   ansible.builtin.file:
     path: /tmp/nzbget-{{ nzbget_version }}/build
