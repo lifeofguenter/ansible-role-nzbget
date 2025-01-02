@@ -2,4 +2,4 @@
 
 nzbget_version_string_match: "nzbget version: {{ nzbget_version }}"
 
-nzbget_libboost_package: "{{ 'libboost-json1.81-dev' if ansible_distribution == 'Debian' and ansible_distribution_major_version|int < 13 else 'libboost-json-dev' }}"
+nzbget_libboost_package: "{{ 'libboost-json1.81-dev' if ansible_distribution == 'Debian' and ansible_distribution_major_version | int < 13 else 'libboost-json-dev' }}"
