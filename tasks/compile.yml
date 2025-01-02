@@ -7,6 +7,7 @@
       - cmake
       - gcc
       - g++
+      - git
       - pkg-config
       - libxml2-dev
       - libncurses-dev
