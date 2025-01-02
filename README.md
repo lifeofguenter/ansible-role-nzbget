@@ -13,7 +13,7 @@ _none_
 ## Role Variables
 
 ```yaml
-nzbget_version: 23.0
+nzbget_version: 24.5
 nzbget_user: nzb
 ```
 
