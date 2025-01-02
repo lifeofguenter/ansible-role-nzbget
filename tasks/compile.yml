@@ -3,17 +3,16 @@
 - name: Install build tools
   ansible.builtin.apt:
     name:
-      - autoconf
       - ca-certificates
-      - make
+      - cmake
       - gcc
       - g++
       - pkg-config
       - libxml2-dev
-      - '{{ nzbget_libboost_package }}'
       - libncurses-dev
       - libssl-dev
       - zlib1g-dev
+      - '{{ nzbget_libboost_package }}'
     update_cache: true
     cache_valid_time: 3600
   become: true
@@ -30,26 +29,27 @@
     chdir: /tmp/nzbget-{{ nzbget_version }}
   changed_when: true
 
+- name: Create build folder
+  ansible.builtin.file:
+    path: /tmp/nzbget-{{ nzbget_version }}/build
+    state: directory
+
 - name: Configure
-  ansible.builtin.command: >
-    ./configure
-    --sysconfdir=/etc
-    --localstatedir=/var
-    --datarootdir=/usr/share
+  ansible.builtin.command: cmake ..
   args:
-    chdir: /tmp/nzbget-{{ nzbget_version }}
+    chdir: /tmp/nzbget-{{ nzbget_version }}/build
   changed_when: true
 
 - name: Build
-  ansible.builtin.command: make -j{{ ansible_processor_vcpus }}
+  ansible.builtin.command: cmake --build . -j{{ ansible_processor_vcpus }}
   args:
-    chdir: /tmp/nzbget-{{ nzbget_version }}
+    chdir: /tmp/nzbget-{{ nzbget_version }}/build
   changed_when: true
 
 - name: Install
-  ansible.builtin.command: make install
+  ansible.builtin.command: cmake --install .
   args:
-    chdir: /tmp/nzbget-{{ nzbget_version }}
+    chdir: /tmp/nzbget-{{ nzbget_version }}/build
   become: true
   changed_when: true
   notify: Restart_nzbget
