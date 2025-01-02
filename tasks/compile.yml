@@ -10,7 +10,7 @@
       - g++
       - pkg-config
       - libxml2-dev
-      - libboost-json1.81-dev
+      - '{{ nzbget_libboost_package }}'
       - libncurses-dev
       - libssl-dev
       - zlib1g-dev
